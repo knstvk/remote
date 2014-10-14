@@ -4,7 +4,7 @@
 
 /// <reference path="model.ts" />
 
-module mpremote {
+module remote {
 
     export class Server {
 

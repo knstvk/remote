@@ -7,7 +7,7 @@
 /// <reference path="model.ts" />
 /// <reference path="server.ts" />
 
-module mpremote {
+module remote {
 
     export class MainView {
 
@@ -85,6 +85,6 @@ module mpremote {
 }
 
 $(document).ready(() => {
-    var mainView = new mpremote.MainView();
+    var mainView = new remote.MainView();
     mainView.render(null);
 });

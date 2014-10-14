@@ -4,7 +4,7 @@
 
 /// <reference path="../lib/underscore/underscore.d.ts" />
 
-module mpremote {
+module remote {
 
     export class Item {
 

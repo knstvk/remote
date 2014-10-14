@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="Generated files" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://$PROJECT_DIR$/script/server.js" />
+        <item url="file://$PROJECT_DIR$/script/main_view.js" />
+        <item url="file://$PROJECT_DIR$/script/model.js" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/script/server.js" />
+      <root url="file://$PROJECT_DIR$/script/main_view.js" />
+      <root url="file://$PROJECT_DIR$/script/model.js" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>

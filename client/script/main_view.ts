@@ -39,18 +39,19 @@ module remote {
                 }
             });
 
-            var items = this.server.load(parent == null ? null : parent.getPath());
-            for (var i = 0; i < items.length; i++) {
-                tableBody.append(this.createRow(i, items[i]));
-            }
+            this.server.load(parent == null ? null : parent.getPath(), (items: Array<Item>) => {
+                for (var i = 0; i < items.length; i++) {
+                    tableBody.append(this.createRow(i, items[i]));
+                }
 
-            $("a.name-link").on("click", (event) => {
-                event.preventDefault();
-                this.render(items[$(event.target).data("id")]);
-            });
+                $("a.name-link").on("click", (event) => {
+                    event.preventDefault();
+                    this.render(items[$(event.target).data("id")]);
+                });
 
-            $(".add").on("click", (event) => {
-                this.server.add(items[$(event.target).data("id")]);
+                $(".add").on("click", (event) => {
+                    this.server.add(items[$(event.target).data("id")]);
+                });
             });
         }
 

@@ -2,15 +2,17 @@
   <library name="Generated files" type="javaScript">
     <properties>
       <sourceFilesUrls>
-        <item url="file://$PROJECT_DIR$/script/server.js" />
-        <item url="file://$PROJECT_DIR$/script/main_view.js" />
-        <item url="file://$PROJECT_DIR$/script/model.js" />
+        <item url="file://$PROJECT_DIR$/server/script/app.js" />
+        <item url="file://$PROJECT_DIR$/client/script/server.js" />
+        <item url="file://$PROJECT_DIR$/client/script/model.js" />
+        <item url="file://$PROJECT_DIR$/client/script/main_view.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
-      <root url="file://$PROJECT_DIR$/script/server.js" />
-      <root url="file://$PROJECT_DIR$/script/main_view.js" />
-      <root url="file://$PROJECT_DIR$/script/model.js" />
+      <root url="file://$PROJECT_DIR$/script/app.js" />
+      <root url="file://$PROJECT_DIR$/client/script/server.js" />
+      <root url="file://$PROJECT_DIR$/client/script/model.js" />
+      <root url="file://$PROJECT_DIR$/client/script/main_view.js" />
     </CLASSES>
     <SOURCES />
   </library>

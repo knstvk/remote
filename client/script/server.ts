@@ -75,8 +75,24 @@ module remote {
 
         }
 
+        play(): void {
+            $.get("control", {cmd: "play"});
+        }
+
+        stop(): void {
+            $.get("control", {cmd: "stop"});
+        }
+
+        previous(): void {
+            $.get("control", {cmd: "prev"});
+        }
+
+        next(): void {
+            $.get("control", {cmd: "next"});
+        }
+
         add(item: Item): void {
-            console.log("Add " + item.getPath());
+            $.get("add", {path: item.getPath()});
         }
     }
 }

@@ -10,27 +10,53 @@
 var _: UnderscoreStatic = require('underscore');
 var restify = require('restify');
 var fs = require('fs');
+var child_process = require('child_process');
 
 var program = require('commander');
-program.option('-d, --root-dir <dir>', 'Root directory')
+program
+    .option('-c, --command <command>', 'Full path to command')
+    .option('-d, --root-dir <dir>', 'Root directory')
     .parse(process.argv);
+
+var command: string = program.command;
+if (!command) {
+    console.log("command is not specified");
+    process.exit(-1);
+}
 
 var root: string = program.rootDir;
 if (!root)
     root = "c:\\";
 console.log("root: " + root);
 
+var supportedExtensions = ["mp3", "flac", "cue"];
+
+var commandOptions = {
+    "play": "-t",
+    "stop": "-s",
+    "next": "-f",
+    "prev": "-r"
+};
+
+function extIsSupported(name: string): boolean {
+    var pos = name.lastIndexOf(".");
+    if (pos == -1 || pos == name.length - 1)
+        return false;
+    var ext = name.substring(pos + 1).toLowerCase();
+    return supportedExtensions.indexOf(ext) > -1;
+}
+
 function list(req, res, next) {
     console.log("list?dir=%s", req.query.dir);
 
-    var path: string = root;
+    var path = root;
     if (req.query.dir)
         path += "/" + req.query.dir;
 
     fs.readdir(path, (err, files) => {
         var result = [];
         for (var i = 0; i < files.length; i++) {
-            var name: String = files[i];
+            var name: string = files[i];
             var size: number;
 
             var stats = fs.statSync(path + "/" + name);
@@ -39,15 +65,31 @@ function list(req, res, next) {
             } else {
                 size = stats["size"];
             }
-            result.push({path: req.query.dir + "/" + name, size: size});
+            if (stats.isDirectory() || extIsSupported(name))
+                result.push({path: req.query.dir + "/" + name, size: size});
         }
         res.send(result);
     });
+    next();
+}
 
-//    res.send([
-//        {path: "Radiohead", size: -1},
-//        {path: "Joe  Bonamassa", size: -1}
-//    ]);
+function control(req, res, next) {
+    var option = commandOptions[req.query.cmd];
+    console.log("command " + option);
+    if (option) {
+        child_process.execFile(command, [option]);
+        res.send("ok");
+    } else {
+        res.send("unsupported option");
+    }
+    next();
+}
+
+function add(req, res, next) {
+    var path = root + "/" + req.query.path;
+    console.log("adding " + path);
+    child_process.execFile(command, ["-E", path]);
+    res.send("ok");
     next();
 }
 
@@ -55,6 +97,8 @@ var server = restify.createServer();
 server.use(restify.queryParser());
 
 server.get("/list", list);
+server.get("/control", control);
+server.get("/add", add);
 
 server.get(/.*/, restify.serveStatic({
     directory: './client',

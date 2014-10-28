@@ -15,11 +15,30 @@ module remote {
 
         constructor() {
             this.server = new Server();
+
+            $("#play-btn").on("click", (event) => {
+                event.preventDefault();
+                this.server.play();
+            });
+            $("#stop-btn").on("click", (event) => {
+                event.preventDefault();
+                this.server.stop();
+            });
+            $("#prev-btn").on("click", (event) => {
+                event.preventDefault();
+                this.server.previous()
+            });
+            $("#next-btn").on("click", (event) => {
+                event.preventDefault();
+                this.server.next();
+            });
         }
 
         render(parent: Item): void {
+            var tableBody;
             var breadcrumbs;
-            var tableBody = $(".table tbody");
+
+            tableBody = $(".table tbody");
             tableBody.empty();
 
             breadcrumbs = $("#breadcrumbs");

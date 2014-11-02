@@ -12,6 +12,7 @@ module remote {
     export class MainView {
 
         private server: Server;
+        private currentItem: Item;
 
         constructor() {
             this.server = new Server();
@@ -32,11 +33,19 @@ module remote {
                 event.preventDefault();
                 this.server.next();
             });
+
+            $("a.add-current").on("click", (event) => {
+                event.preventDefault();
+                if (this.currentItem)
+                    this.server.add(this.currentItem);
+            });
         }
 
         render(parent: Item): void {
             var tableBody;
             var breadcrumbs;
+
+            this.currentItem = parent;
 
             tableBody = $(".table tbody");
             tableBody.empty();

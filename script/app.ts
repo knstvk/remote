@@ -11,6 +11,7 @@ var _: UnderscoreStatic = require('underscore');
 var restify = require('restify');
 var fs = require('fs');
 var child_process = require('child_process');
+var filesize = require('filesize');
 
 var program = require('commander');
 program
@@ -26,7 +27,7 @@ if (!command) {
 
 var root: string = program.rootDir;
 if (!root)
-    root = "c:\\";
+    root = "/";
 console.log("root: " + root);
 
 var supportedExtensions = ["mp3", "flac", "cue"];
@@ -63,7 +64,7 @@ function list(req, res, next) {
             if (stats.isDirectory()) {
                 size = -1;
             } else {
-                size = stats["size"];
+                size = filesize(stats["size"]);
             }
             if (stats.isDirectory() || extIsSupported(name))
                 result.push({path: req.query.dir + "/" + name, size: size});

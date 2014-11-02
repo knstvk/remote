@@ -3,3 +3,25 @@ body {
     padding-top: 70px;
     padding-bottom: 20px;
 }
+
+.tcol-num {
+    width: 10%;
+}
+.tcol-name {
+    width: 50%;
+}
+.tcol-size {
+    width: 20%;
+    text-align: right;
+}
+.tcol-action {
+    width: 20%;
+    text-align: right;
+}
+
+div.add-current {
+    margin-top: 8px;
+}
+a.add-current {
+    margin-right: 8px;
+}

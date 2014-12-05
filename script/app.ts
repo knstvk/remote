@@ -30,7 +30,7 @@ if (!root)
     root = "/";
 console.log("root: " + root);
 
-var supportedExtensions = ["mp3", "flac", "cue"];
+var supportedExtensions = ["mp3", "m4a", "flac", "cue"];
 
 var commandOptions = {
     "play": "-t",
